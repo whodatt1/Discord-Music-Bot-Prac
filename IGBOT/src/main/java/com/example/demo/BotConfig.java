@@ -31,13 +31,14 @@ public class BotConfig {
 			
 			token = config.getString("token");
 			prefix = config.getString("prefix");
-			helpWord = config.getString("helpWord");
-			successEmoji = config.getString("successEmoji");
-			warningEmoji = config.getString("warningEmoji");
-			errorEmoji = config.getString("errorEmoji");
-			loadingEmoji = config.getString("loadingEmoji");
-			searchingEmoji = config.getString("searchingEmoji");
-			stayInChannel = config.getBoolean("stayInChannel");
+			owner = config.getLong("owner");
+			helpWord = config.getString("help");
+			successEmoji = config.getString("success");
+			warningEmoji = config.getString("warning");
+			errorEmoji = config.getString("error");
+			loadingEmoji = config.getString("loading");
+			searchingEmoji = config.getString("searching");
+			stayInChannel = config.getBoolean("stayinchannel");
 			
 			valid = true;
 		} catch (ConfigException e) {
