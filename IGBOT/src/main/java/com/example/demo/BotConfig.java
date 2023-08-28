@@ -13,7 +13,7 @@ import lombok.Getter;
 public class BotConfig {
 	
 	private String token, prefix, helpWord, successEmoji, warningEmoji, errorEmoji, loadingEmoji, searchingEmoji;
-	private boolean stayInChannel, npImages;
+	private boolean stayInChannel;
 	private long owner;
 	
 	private boolean valid = false;
