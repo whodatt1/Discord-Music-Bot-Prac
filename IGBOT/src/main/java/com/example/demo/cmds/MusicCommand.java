@@ -12,6 +12,7 @@ public abstract class MusicCommand extends Command {
 	
 	protected final AudioManager audioManager;
 	
+	// 생성자
 	public MusicCommand (AudioManager audioManager) {
 		this.guildOnly = true;
 		this.category = new Category("Music");
@@ -21,6 +22,7 @@ public abstract class MusicCommand extends Command {
 	@Override
 	protected void execute(CommandEvent event) {
 		TextChannel tChannel = event.getTextChannel();
+		// 텍스트 채널이 아닐시
 		if(tChannel == null) {
 			try {
 				event.getMessage().delete().queue();
@@ -32,6 +34,7 @@ public abstract class MusicCommand extends Command {
 		
 		Guild guild = event.getGuild();
 		
+		// 길드 정보가 있으면
 		if (guild != null) {
 			doCommand(event);
 		}
