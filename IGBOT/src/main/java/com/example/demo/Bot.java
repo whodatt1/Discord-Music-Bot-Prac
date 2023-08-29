@@ -12,9 +12,9 @@ public class Bot {
 	
 	private boolean shutdown = false;
 	
-	public Bot(EventWaiter waiter, BotConfig config) {
-		this.waiter = waiter;
+	public Bot(BotConfig config, EventWaiter waiter) {
 		this.config = config;
+		this.waiter = waiter;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.example.demo.cmds;
 
+import com.example.demo.Bot;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
@@ -10,13 +11,15 @@ import net.dv8tion.jda.api.managers.AudioManager;
 
 public abstract class MusicCommand extends Command {
 	
-	protected final AudioManager audioManager;
+	protected final Bot bot;
+    protected boolean bePlaying;
+    protected boolean beListening;
 	
 	// 생성자
-	public MusicCommand (AudioManager audioManager) {
+	public MusicCommand (Bot bot) {
+		this.bot = bot;
 		this.guildOnly = true;
 		this.category = new Category("Music");
-		this.audioManager = audioManager;
 	}
 	
 	@Override

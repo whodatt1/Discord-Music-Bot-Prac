@@ -34,6 +34,8 @@ public class IGBot {
 		// 리스너
 		EventWaiter waiter = new EventWaiter();
 		
+		Bot bot = new Bot(config, waiter);
+		
 		CommandClientBuilder cb = new CommandClientBuilder()
 				.setPrefix(config.getPrefix())
 				.setOwnerId(Long.toString(config.getOwner()))
