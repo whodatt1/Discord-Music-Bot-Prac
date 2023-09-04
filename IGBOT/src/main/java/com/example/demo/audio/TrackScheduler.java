@@ -27,6 +27,13 @@ public class TrackScheduler extends AudioEventAdapter {
 		this.queue = new LinkedBlockingQueue<>();
 	}
 	
+	// 대기열에 아무것도 없을시 즉시 재생 있다면 추가
+	public void queue(AudioTrack track) {
+		if (!player.startTrack(track, true)) {
+			queue.offer(track);
+		}
+	}
+	
 	// 노래 스킵
 	public void skip() {
 		player.startTrack(queue.poll(), false);

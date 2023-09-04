@@ -12,6 +12,7 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -40,7 +41,7 @@ public class IGBot {
 				.setPrefix(config.getPrefix())
 				.setOwnerId(Long.toString(config.getOwner()))
 				.setEmojis(config.getSuccessEmoji(), config.getWarningEmoji(), config.getErrorEmoji())
-				.setHelpWord(config.getHelpWord())
+				// 기본타입 "!help"
 				.useDefaultGame()
 				.setLinkedCacheSize(200)
 				.addCommands(
@@ -52,9 +53,10 @@ public class IGBot {
 			JDA jda = JDABuilder.create(config.getToken(), Arrays.asList(INTENTS))
 					.enableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE)
 					.disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS, CacheFlag.EMOTE, CacheFlag.ONLINE_STATUS)
+					// 봇이 로드될때 Game을 설정
+					.setStatus(OnlineStatus.DO_NOT_DISTURB)
 					.setActivity(Activity.playing("머기"))
 					.addEventListeners(cb.build(), waiter)
-					.setBulkDeleteSplittingEnabled(true)
 					.build();
 			
 		} catch (LoginException e) {

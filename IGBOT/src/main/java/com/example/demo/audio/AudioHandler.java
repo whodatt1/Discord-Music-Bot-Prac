@@ -18,12 +18,23 @@ public class AudioHandler implements AudioSendHandler {
 	
 	@Override
 	public boolean canProvide() {
-		// TODO Auto-generated method stub
-		return false;
+		if (lastFrame == null) {
+			// 제공된 프레임 또는 사용 가능한 프레임이 없으면 null
+			lastFrame = audioPlayer.provide();
+		}
+		
+		return lastFrame != null;
 	}
+	
 	@Override
 	public ByteBuffer provide20MsAudio() {
-		// TODO Auto-generated method stub
-		return null;
+		// ByteBuffer : 바이트 데이터를 저장하고 읽는 저장소
+		return ByteBuffer.wrap(lastFrame.getData());
+	}
+
+	@Override
+	public boolean isOpus() {
+		// 이 메소드가 true를 반환하면 JDA는 Provide20MsAudio()에서 제공한 오디오 데이터를 Opus 오디오의 사전 인코딩된 20밀리초 패킷으로 처리
+		return true;
 	}
 }

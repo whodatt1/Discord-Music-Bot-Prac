@@ -9,6 +9,8 @@ import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 
+import net.dv8tion.jda.api.entities.Guild;
+
 public class AudioManager {
 	
 	private final AudioPlayerManager playerManager;
@@ -18,10 +20,25 @@ public class AudioManager {
         this.musicManagers = new HashedMap<>();
         this.playerManager = new DefaultAudioPlayerManager();
         
+        // setPlaylistPageCount : 재생 목록 페이지 카운트하나의 재생목록에서 로드된 최대 페이지 수
         playerManager.source(YoutubeAudioSourceManager.class).setPlaylistPageCount(10);
         
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioSourceManagers.registerLocalSource(playerManager);
+    }
+    
+    public synchronized GuildMusicManager getGuildMusicManager(Guild guild) {
+    	long guildId = Long.parseLong(guild.getId());
+    	GuildMusicManager musicManager = musicManagers.get(guildId);
+    	
+    	if (musicManager == null) {
+    		musicManager = new GuildMusicManager(playerManager);
+    		musicManagers.put(guildId, musicManager);
+    	}
+    	
+    	guild.getAudioManager().setSendingHandler(musicManager.getAudioHandler());
+    	
+    	return musicManager;
     }
     
     public String getTimeStamp(long milliseconds) {
