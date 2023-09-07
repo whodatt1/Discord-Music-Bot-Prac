@@ -9,8 +9,10 @@ import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 
+import lombok.Getter;
 import net.dv8tion.jda.api.entities.Guild;
 
+@Getter
 public class AudioManager {
 	
 	private final AudioPlayerManager playerManager;

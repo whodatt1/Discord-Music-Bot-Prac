@@ -6,8 +6,13 @@ import com.example.demo.Bot;
 import com.example.demo.cmds.MusicCommand;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import com.jagrosh.jdautilities.menu.OrderedMenu;
+import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
+import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Message;
 
 public class SearchCmd extends MusicCommand {
 
@@ -39,6 +44,43 @@ public class SearchCmd extends MusicCommand {
 			event.reply("검색어를 입력해주세요.");
 			return;
 		}
+		event.reply(searchingEmoji+" 검색중... `["+event.getArgs()+"]`", 
+                m -> bot.getAudioManager().getPlayerManager().loadItemOrdered(event.getGuild(), searchPrefix + event.getArgs(), new ResultHandler(m, event)));
 	}
 	
+	private class ResultHandler implements AudioLoadResultHandler {
+		
+		private final Message m;
+		private final CommandEvent event;
+		
+		private ResultHandler(Message m, CommandEvent event) {
+			this.m = m;
+			this.event = event;
+		}
+
+		@Override
+		public void trackLoaded(AudioTrack track) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void playlistLoaded(AudioPlaylist playlist) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void noMatches() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void loadFailed(FriendlyException exception) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 }
