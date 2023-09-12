@@ -22,8 +22,7 @@ public class AudioManager {
         this.musicManagers = new HashedMap<>();
         this.playerManager = new DefaultAudioPlayerManager();
         
-        // setPlaylistPageCount : 재생 목록 페이지 카운트하나의 재생목록에서 로드된 최대 페이지 수
-        playerManager.source(YoutubeAudioSourceManager.class).setPlaylistPageCount(10);
+        playerManager.registerSourceManager(new YoutubeAudioSourceManager());
         
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioSourceManagers.registerLocalSource(playerManager);

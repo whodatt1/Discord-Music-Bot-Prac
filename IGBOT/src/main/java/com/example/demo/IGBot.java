@@ -7,6 +7,7 @@ import javax.security.auth.login.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.example.demo.cmds.music.SearchCmd;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
@@ -15,6 +16,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
+import net.dv8tion.jda.api.managers.AudioManager;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
@@ -46,6 +48,7 @@ public class IGBot {
 				.setLinkedCacheSize(200)
 				.addCommands(
 						// 여기에 커맨드 클래스 만들어서 넣기
+						new SearchCmd(bot)
 						);
 		
 		try {

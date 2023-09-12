@@ -35,6 +35,8 @@ public abstract class MusicCommand extends Command {
 			return;
 		}
 		
+		// 여기에 오디오 채널 커넥션 추가하기
+		
 		Guild guild = event.getGuild();
 		
 		// 길드 정보가 있으면
