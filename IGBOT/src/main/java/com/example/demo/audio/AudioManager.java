@@ -25,7 +25,7 @@ public class AudioManager {
         playerManager.registerSourceManager(new YoutubeAudioSourceManager());
         
         AudioSourceManagers.registerRemoteSources(playerManager);
-        AudioSourceManagers.registerLocalSource(playerManager);
+//        AudioSourceManagers.registerLocalSource(playerManager);
     }
     
     public synchronized GuildMusicManager getGuildMusicManager(Guild guild) {

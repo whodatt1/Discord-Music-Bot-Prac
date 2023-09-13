@@ -18,11 +18,7 @@ public class AudioHandler implements AudioSendHandler {
 	
 	@Override
 	public boolean canProvide() {
-		if (lastFrame == null) {
-			// 제공된 프레임 또는 사용 가능한 프레임이 없으면 null
-			lastFrame = audioPlayer.provide();
-		}
-		
+		lastFrame = audioPlayer.provide();
 		return lastFrame != null;
 	}
 	

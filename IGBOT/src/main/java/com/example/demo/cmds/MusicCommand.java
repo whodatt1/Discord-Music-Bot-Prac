@@ -5,9 +5,10 @@ import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.exceptions.PermissionException;
-import net.dv8tion.jda.api.managers.AudioManager;
 
 public abstract class MusicCommand extends Command {
 	
@@ -36,6 +37,23 @@ public abstract class MusicCommand extends Command {
 		}
 		
 		// 여기에 오디오 채널 커넥션 추가하기
+		GuildVoiceState userState = event.getMember().getVoiceState();
+		VoiceChannel voiceChannel = userState.getChannel();
+		
+		// 현재 사용자가 음성채널에 연결되어 있는지 확인
+		if (!userState.inVoiceChannel() || userState.isDeafened()) {
+			if (voiceChannel == null) {
+				event.replyError("당신은 현재 보이스 채널에 연결되어있지 않습니다. 보이스 채널에 입장 해주세요.");
+			}
+			return;
+		}
+		
+		try {
+			event.getGuild().getAudioManager().openAudioConnection(userState.getChannel());
+		} catch (PermissionException e) {
+			event.reply(event.getClient().getError() + userState.getChannel().getName() + "에 연결할 수 없습니다!");
+			return;
+		}
 		
 		Guild guild = event.getGuild();
 		

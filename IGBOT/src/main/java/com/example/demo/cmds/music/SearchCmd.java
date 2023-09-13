@@ -67,19 +67,19 @@ public class SearchCmd extends MusicCommand {
 
 		@Override
 		public void trackLoaded(AudioTrack track) {
-			event.replySuccess(track.getInfo().title + " 트랙리스트에 추가");
 			musicManager.scheduler.queue(track);
-			
+			event.replySuccess(track.getInfo().title + " 트랙리스트에 추가");
 		}
 
 		@Override
 		public void playlistLoaded(AudioPlaylist playlist) {
 			builder.setColor(event.getSelfMember().getColor())
-				   .setText(event.getClient() + " 검색 결과 `"+event.getArgs()+"`:")
+				   .setText("검색 결과 `"+event.getArgs()+"`:")
 				   .setChoices(new String[0])
 				   .setSelection((msg, i) -> {
 					   AudioTrack track = playlist.getTracks().get(i-1);
 					   musicManager.scheduler.queue(track);
+					   event.replySuccess(track.getInfo().title + " 재생 중");
 				   })
 				   .setCancel((msg) -> {})
 				   .setUsers(event.getAuthor())
