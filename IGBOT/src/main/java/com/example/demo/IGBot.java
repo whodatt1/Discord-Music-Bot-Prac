@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.cmds.music.SearchCmd;
+import com.example.demo.cmds.music.SkipCmd;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
@@ -49,6 +50,7 @@ public class IGBot {
 				.addCommands(
 						// 여기에 커맨드 클래스 만들어서 넣기
 						new SearchCmd(bot)
+						, new SkipCmd(bot)
 						);
 		
 		try {
