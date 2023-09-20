@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.cmds.music.ExitCmd;
+import com.example.demo.cmds.music.RepeatCmd;
 import com.example.demo.cmds.music.SearchCmd;
 import com.example.demo.cmds.music.SkipCmd;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
@@ -52,6 +53,7 @@ public class IGBot {
 						new SearchCmd(bot)
 						, new SkipCmd(bot)
 						, new ExitCmd(bot)
+						, new RepeatCmd(bot)
 						);
 		
 		try {
