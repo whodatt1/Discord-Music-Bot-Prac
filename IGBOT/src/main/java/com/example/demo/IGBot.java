@@ -17,7 +17,6 @@ import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.exceptions.ErrorResponseException;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -46,11 +45,12 @@ public class IGBot {
 				.setPrefix(config.getPrefix())
 				.setOwnerId(Long.toString(config.getOwner()))
 				.setEmojis(config.getSuccessEmoji(), config.getWarningEmoji(), config.getErrorEmoji())
-				// 기본타입 "!help"
-				.useDefaultGame()
+				.setHelpWord(config.getHelpWord())
 				.setLinkedCacheSize(200)
 				.addCommands(
 						// 여기에 커맨드 클래스 만들어서 넣기
+						
+						// Music
 						new SearchCmd(bot)
 						, new SkipCmd(bot)
 						, new ExitCmd(bot)
@@ -60,13 +60,12 @@ public class IGBot {
 		
 		try {
 			// JDA
-			JDA jda = JDABuilder.create(config.getToken(), Arrays.asList(INTENTS))
+			JDA jda = JDABuilder
+					.create(config.getToken(), Arrays.asList(INTENTS))
 					.enableCache(CacheFlag.MEMBER_OVERRIDES, CacheFlag.VOICE_STATE)
 					.disableCache(CacheFlag.ACTIVITY, CacheFlag.CLIENT_STATUS, CacheFlag.EMOTE, CacheFlag.ONLINE_STATUS)
-					// 봇이 로드될때 Game을 설정
-					.setStatus(OnlineStatus.DO_NOT_DISTURB)
-					.setActivity(Activity.playing("머기"))
 					.addEventListeners(cb.build(), waiter)
+					.setActivity(Activity.playing("두근두근세근네근"))
 					.build();
 			
 		} catch (LoginException e) {
@@ -79,7 +78,7 @@ public class IGBot {
 			
 		} catch (ErrorResponseException e) {
 			
-			LOG.error("인터넷 연결의 확인하세요.");
+			LOG.error("인터넷 연결을 확인하세요.");
 			
 		}
 	}
