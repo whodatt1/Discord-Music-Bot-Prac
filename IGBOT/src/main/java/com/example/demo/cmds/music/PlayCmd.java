@@ -22,14 +22,15 @@ public class PlayCmd extends MusicCommand {
 		super(bot);
 		this.loadingEmoji = bot.getConfig().getLoadingEmoji();
 		this.name = "play";
-		this.arguments = "title|URL|subcommand";
+		//기본 도움말 빌더에 사용되는 명령에 대한 인수 형식 문자열
+		this.arguments = "<title|URL|subcommand>";
 		this.help = "URL을 통해 제공된 노래를 재생합니다.";
 	}
 
 	@Override
 	public void doCommand(CommandEvent event) {
 		if (event.getArgs().isEmpty()) {
-			event.reply("URL을 입력해주세요.");
+			event.reply("제목 혹은 URL 입력해주세요.");
 			return;
 		}
 		
@@ -46,33 +47,40 @@ public class PlayCmd extends MusicCommand {
 			this.event = event;
 			this.ytsearch = ytsearch;
 		}
-		
-		private void loadSingle(AudioTrack track, AudioPlaylist playlist) {
-			musicManager.scheduler.queue(track);
-		}
 
 		@Override
 		public void trackLoaded(AudioTrack track) {
-			// TODO Auto-generated method stub
-			
+			musicManager.scheduler.queue(track);
+			event.replySuccess(track.getInfo().title + " 트랙리스트에 추가");
 		}
 
 		@Override
 		public void playlistLoaded(AudioPlaylist playlist) {
-			// TODO Auto-generated method stub
+			AudioTrack firstTrack = playlist.getSelectedTrack();
 			
+			System.out.println(firstTrack.getIdentifier());
+			
+			if (firstTrack == null) {
+				firstTrack = playlist.getTracks().get(0);
+			}
+			
+			event.replySuccess(firstTrack.getInfo().title + " 트랙리스트에 추가 ");
+			
+			musicManager.scheduler.queue(firstTrack);
 		}
 
 		@Override
 		public void noMatches() {
-			// TODO Auto-generated method stub
-			
+			if (ytsearch) {
+				event.replyError(event.getArgs() + " 찾지 못함");
+			} else {
+				bot.getAudioManager().getPlayerManager().loadItemOrdered(event.getGuild(), "ytsearch:" + event.getArgs(), new ResultHandler(m, event, true));
+			}
 		}
 
 		@Override
 		public void loadFailed(FriendlyException exception) {
-			// TODO Auto-generated method stub
-			
+			event.replyError("재생할 수 없습니다 : " + exception.getMessage());
 		}
 		
 		

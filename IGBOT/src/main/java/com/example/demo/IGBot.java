@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.demo.cmds.music.ExitCmd;
+import com.example.demo.cmds.music.PlayCmd;
+import com.example.demo.cmds.music.PlaylistCmd;
 import com.example.demo.cmds.music.RepeatCmd;
 import com.example.demo.cmds.music.SearchCmd;
 import com.example.demo.cmds.music.ShuffleCmd;
@@ -56,6 +58,8 @@ public class IGBot {
 						, new ExitCmd(bot)
 						, new RepeatCmd(bot)
 						, new ShuffleCmd(bot)
+						, new PlayCmd(bot)
+						, new PlaylistCmd(bot)
 						);
 		
 		try {
