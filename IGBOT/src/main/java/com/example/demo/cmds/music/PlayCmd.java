@@ -28,7 +28,7 @@ public class PlayCmd extends MusicCommand {
 	}
 
 	@Override
-	public void doCommand(CommandEvent event) {
+	public void doCommand(CommandEvent event) { 
 		if (event.getArgs().isEmpty()) {
 			event.reply("제목 혹은 URL 입력해주세요.");
 			return;

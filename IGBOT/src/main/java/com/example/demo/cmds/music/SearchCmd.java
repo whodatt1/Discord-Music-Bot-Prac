@@ -1,5 +1,6 @@
 package com.example.demo.cmds.music;
 
+import java.util.Queue;
 import java.util.concurrent.TimeUnit;
 
 import com.example.demo.Bot;
@@ -79,7 +80,11 @@ public class SearchCmd extends MusicCommand {
 				   .setSelection((msg, i) -> {
 					   AudioTrack track = playlist.getTracks().get(i-1);
 					   musicManager.scheduler.queue(track);
-					   event.replySuccess(track.getInfo().title + " 재생 중");
+					   
+					   GuildMusicManager musicManager = bot.getAudioManager().getGuildMusicManager(event.getGuild());
+					   Queue<AudioTrack> q = musicManager.scheduler.getQueue();
+					   
+					   event.replySuccess(track.getInfo().title + (q.isEmpty() ? " 재생" : " 추가"));
 				   })
 				   .setCancel((msg) -> {})
 				   .setUsers(event.getAuthor())
