@@ -84,7 +84,7 @@ public class SearchCmd extends MusicCommand {
 					   GuildMusicManager musicManager = bot.getAudioManager().getGuildMusicManager(event.getGuild());
 					   Queue<AudioTrack> q = musicManager.scheduler.getQueue();
 					   
-					   event.replySuccess(track.getInfo().title + (q.isEmpty() ? " 재생 중" : " 추가"));
+					   event.replySuccess(track.getInfo().title + (q.isEmpty() ? " 재생 중" : " 추가 완료"));
 				   })
 				   .setCancel((msg) -> {})
 				   .setUsers(event.getAuthor())
