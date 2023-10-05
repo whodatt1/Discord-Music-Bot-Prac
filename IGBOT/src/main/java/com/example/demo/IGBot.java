@@ -60,6 +60,8 @@ public class IGBot {
 						, new ShuffleCmd(bot)
 						, new PlayCmd(bot)
 						, new PlaylistCmd(bot)
+						
+						// Team
 						);
 		
 		try {

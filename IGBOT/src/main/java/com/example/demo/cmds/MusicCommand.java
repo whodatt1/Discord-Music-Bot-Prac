@@ -17,7 +17,7 @@ public abstract class MusicCommand extends Command {
     protected boolean beListening;
 	
 	// 생성자
-	public MusicCommand (Bot bot) {
+	public MusicCommand(Bot bot) {
 		this.bot = bot;
 		this.guildOnly = true;
 		this.category = new Category("Music");
