@@ -24,7 +24,6 @@ public class TeamUpCmd extends TeamCommand {
 
 	@Override
 	public void doCommand(CommandEvent event) {
-		
 		// 사용자가 음성채널에 있는 경우에만 실행
 		GuildVoiceState userState = event.getMember().getVoiceState();
 		VoiceChannel voiceChannel = userState.getChannel();
