@@ -14,6 +14,7 @@ import com.example.demo.cmds.music.RepeatCmd;
 import com.example.demo.cmds.music.SearchCmd;
 import com.example.demo.cmds.music.ShuffleCmd;
 import com.example.demo.cmds.music.SkipCmd;
+import com.example.demo.cmds.team.TeamUpCmd;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 
@@ -62,6 +63,7 @@ public class IGBot {
 						, new PlaylistCmd(bot)
 						
 						// Team
+						, new TeamUpCmd(bot)
 						);
 		
 		try {

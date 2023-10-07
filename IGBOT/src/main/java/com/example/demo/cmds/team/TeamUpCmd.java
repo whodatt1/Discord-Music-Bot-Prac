@@ -37,6 +37,9 @@ public class TeamUpCmd extends TeamCommand {
 			return;
 		}
 		
+		System.out.println(event.getMember().getNickname());
+		
+		/*
 		List<Member> members = voiceChannel.getMembers();
 		
 		if (members.size() % 2 != 0) {
@@ -47,6 +50,14 @@ public class TeamUpCmd extends TeamCommand {
 		// 멤버 섞기
 		Collections.shuffle(members);
 		
+		String[] teamA = new String[members.size() / 2];
+		String[] teamB = new String[members.size() / 2];
 		
+		for (int i = 0; i < members.size(); i++) {
+			if (i < members.size() / 2) {
+				
+			}
+		}
+		*/
 	}
 }
