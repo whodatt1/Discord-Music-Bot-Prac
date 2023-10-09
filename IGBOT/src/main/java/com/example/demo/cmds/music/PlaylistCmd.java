@@ -39,6 +39,7 @@ public class PlaylistCmd extends MusicCommand {
 	@Override
 	public void doCommand(CommandEvent event) {
 		
+		// 페이지넘버 세팅
 		int pageNo = 1;
 		try {
 			System.out.println(event.getArgs());
@@ -58,9 +59,7 @@ public class PlaylistCmd extends MusicCommand {
 		
 		int trackCount = 0;
 		
-		for (AudioTrack track : q) {
-			songs[trackCount] = "`["+track.getDuration()+"]` " + track.getInfo().title;
-		}
+		q.forEach((track) -> songs[trackCount] = "`["+track.getDuration()+"]` " + track.getInfo().title);
 		
 		builder.setItems(songs)
 			   .setText(String.valueOf(q.size()) + " 개의 " + "트랙 리스트 : ")
